@@ -4,14 +4,12 @@ import javafx.scene.image.ImageView;
 public class StaticThing {
     private double x;
     private double y;
-    private Image img;
     private final  ImageView imgvw;
 
     public StaticThing(double x,double y, String backgrd) {
         this.x = x;
         this.y = y;
-        this.img = new Image(backgrd);
-        this.imgvw =new ImageView(img);
+        this.imgvw =new ImageView(new Image(backgrd));
 
     }
 

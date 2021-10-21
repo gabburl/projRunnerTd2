@@ -1,6 +1,6 @@
 public class Camera {
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
     public Camera(int x, int y) {
         this.x = x;
@@ -8,11 +8,11 @@ public class Camera {
 
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
@@ -20,4 +20,9 @@ public class Camera {
     public String toString() {
         return "x : " +x +  " y : " +y;
     }
+    public void update(long time) {
+
+    }
+
+
 }
