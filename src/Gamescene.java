@@ -14,6 +14,7 @@ public class Gamescene extends Scene{
     private StaticThing listcoeurs;
     private int nbofLives;
     private Héros hero;
+    private int p;
 
     public Gamescene(Group root) {
         super(root);
@@ -28,9 +29,10 @@ public class Gamescene extends Scene{
         listcoeurs.getImgvw().setX(listcoeurs.getX());
         listcoeurs.getImgvw().setY(listcoeurs.getY());
         listcoeurs.getImgvw().setViewport(new Rectangle2D(0, 0, 24*nbofLives,20 ));
-        this.hero = new Héros(0,200,"C:\\Users\\gabri\\IdeaProjects\\projRunnerTd\\img\\heros.png");
+        this.hero = new Héros(20,175,"C:\\Users\\gabri\\IdeaProjects\\projRunnerTd\\img\\heros.png");
         root.getChildren().add(hero.getImgview());
         timer.start();
+        this.p =0;
     }
 
     public void render(long time){
@@ -48,9 +50,11 @@ public class Gamescene extends Scene{
             bkgrndr.getImgvw().setX(0);
         }
         bkgrndr.getImgvw().setY(0);
-        hero.getImgview().setViewport(new Rectangle2D(10,0,hero.getSizeofwX(), hero.getSizeofwY()));
-        hero.getImgview().setX(hero.getX());
+
+        hero.getImgview().setX(hero.getX()-cam1.getX());
         hero.getImgview().setY(hero.getY());
+
+
     }
 
     public void removeLife(){
@@ -60,13 +64,31 @@ public class Gamescene extends Scene{
 
     }
 
+    /*
+    this.setOnMouseClicked( (event)->{
+        System.out.println("Jump");
+            hero.jump();
+            });
+
+     */
+
+
     AnimationTimer timer = new AnimationTimer()
         {public void handle(long time) {
             hero.update(time);
-            cam1.update(time);
+            cam1.update(time,getHero().getX());
             render(time);
+            p=p+1;
+
+
         }
     };
 
+    public Héros getHero() {
+        return hero;
+    }
 
+    public Camera getCam1() {
+        return cam1;
+    }
 }
