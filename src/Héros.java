@@ -9,9 +9,10 @@ public class Héros extends AnimatedThing {
     private double g;
 
 
-    public Héros(double x,double y ,String spritesheet) {
-        super(x,y, spritesheet);
+    public Héros(double x,double y ,String spritesheet,int sizeofwX,int sizeofwY) {
+        super(x,y, spritesheet, sizeofwX, sizeofwY);
         this.g = 3;
+        Rectangle2D hitboxhero = new Rectangle2D(x,y,sizeofwX,sizeofwY);
     }
 
     @Override
@@ -21,7 +22,7 @@ public class Héros extends AnimatedThing {
         x= x + 2;
 
 
-        if (y<175) {
+        if (y<250) {
             ay = ay - g;
             double deltavy = ay * 0.016;
             vy = vy - deltavy;
@@ -31,9 +32,9 @@ public class Héros extends AnimatedThing {
                 index = 3;
             }
         }
-        if (y>175){
+        if (y>250){
             index =1;
-            y=175;
+            y=250;
             vy=0;
         }
 
@@ -82,5 +83,7 @@ public class Héros extends AnimatedThing {
         ay =175;
         index =2;
     }
+
+
 
 }

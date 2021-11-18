@@ -16,17 +16,20 @@ public abstract class AnimatedThing {
     protected int offset;
     protected int deltatime;
 
-    public AnimatedThing(double x, double y, String spritesheet) {
+    protected Rectangle2D hitbox;
+
+    public AnimatedThing(double x, double y, String spritesheet,int sizeofwX,int sizeofwY) {
         this.x = x;
         this.y = y;
         this.index = 0;
         this.durationframe = 5;
         this.indexmax = 5;
-        this.sizeofwX = 75;
-        this.sizeofwY = 100;
+        this.sizeofwX = sizeofwX;
+        this.sizeofwY = sizeofwY;
         this.offset = 100;
+        this.hitbox = new Rectangle2D(x,y,sizeofwX,sizeofwY);
         this.imgview = new ImageView(new Image(spritesheet));
-        getImgview().setViewport(new Rectangle2D(15, 0, getSizeofwX(), getSizeofwY()));
+        getImgview().setViewport(new Rectangle2D(0, 0, getSizeofwX(), getSizeofwY()));
         getImgview().setX(getX());
         getImgview().setY(getY());
 
@@ -57,5 +60,9 @@ public abstract class AnimatedThing {
     }
 
     public void update(long time) {
+    }
+
+    public Rectangle2D getHitbox() {
+        return hitbox;
     }
 }

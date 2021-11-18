@@ -15,6 +15,7 @@ public class Gamescene extends Scene{
     private int nbofLives;
     private Héros hero;
     private int p;
+    private ArrayList<Foe> foelist;
 
     public Gamescene(Group root) {
         super(root);
@@ -29,20 +30,25 @@ public class Gamescene extends Scene{
         listcoeurs.getImgvw().setX(listcoeurs.getX());
         listcoeurs.getImgvw().setY(listcoeurs.getY());
         listcoeurs.getImgvw().setViewport(new Rectangle2D(0, 0, 24*nbofLives,20 ));
-        this.hero = new Héros(20,175,"C:\\Users\\gabri\\IdeaProjects\\projRunnerTd\\img\\heros.png");
+        this.hero = new Héros(20,250,"C:\\Users\\gabri\\IdeaProjects\\projRunnerTd\\img\\heros.png",75,100);
         root.getChildren().add(hero.getImgview());
         timer.start();
         this.p =0;
+        this.foelist = new ArrayList<Foe>();
+        foelist.add(new Foe(250,300,"C:\\Users\\gabri\\IdeaProjects\\projRunnerTd\\img\\slime.png",57,57));
+        root.getChildren().add(foelist.get(0).getImgview());
+
+
     }
 
     public void render(long time){
         double offsetX = cam1.getX()%800;
         double offsetY = cam1.getY()%800;
-        bkgrndl.getImgvw().setViewport(new Rectangle2D(offsetX,offsetY ,600,300));
+        bkgrndl.getImgvw().setViewport(new Rectangle2D(offsetX,offsetY ,600,400));
         bkgrndl.getImgvw().setX(0);
         bkgrndl.getImgvw().setY(0);
         if  ( offsetX > 200) {
-            bkgrndr.getImgvw().setViewport(new Rectangle2D(0, offsetY, offsetX-200, 300));
+            bkgrndr.getImgvw().setViewport(new Rectangle2D(0, offsetY, offsetX-200, 400));
             bkgrndr.getImgvw().setX(800 - offsetX);
         }
         else {
@@ -53,6 +59,9 @@ public class Gamescene extends Scene{
 
         hero.getImgview().setX(hero.getX()-cam1.getX());
         hero.getImgview().setY(hero.getY());
+
+        foelist.get(0).getImgview().setX(foelist.get(0).getX()-cam1.getX());
+
 
 
     }
@@ -76,6 +85,13 @@ public class Gamescene extends Scene{
     AnimationTimer timer = new AnimationTimer()
         {public void handle(long time) {
             hero.update(time);
+            for (Foe foe : foelist){
+                System.out.println(foe.testHitbox(hero.getHitbox()));
+                if (foe.testHitbox(hero.getHitbox())){
+                    System.out.println("pouet");
+                    removeLife();
+                }
+            }
             cam1.update(time,getHero().getX());
             render(time);
             p=p+1;

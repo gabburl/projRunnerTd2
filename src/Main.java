@@ -18,7 +18,7 @@ public class Main  extends Application {
 
         Gamescene theScene = new Gamescene(root);
         theScene.getHero().setIndex(1);
-        theScene.getCam1().setCamera(0,50);
+        theScene.getCam1().setCamera(0,0);
         //theScene.render();
         primaryStage.setScene(theScene);
         primaryStage.show();
