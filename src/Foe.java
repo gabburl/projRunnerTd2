@@ -1,15 +1,19 @@
 import javafx.geometry.Rectangle2D;
 
 
-public class Foe extends AnimatedThing {
+abstract public class Foe extends AnimatedThing {
+    protected boolean alive;
 
-
-    public Foe(double x, double y, String spritesheet,int sizeofwX,int sizeofwY) {
-        super(x, y, spritesheet, sizeofwX, sizeofwY);
-
+    public Foe(double x, double y, String spritesheet) {
+        super(x, y, spritesheet);
+        this.alive=true;
+        this.id = "foe";
     }
 
-    public boolean testHitbox(Rectangle2D hitboxhero){
-        return hitbox.intersects(hitboxhero);
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
+
+
 }
