@@ -7,7 +7,7 @@ public abstract class AnimatedThing {
     protected double y;
     protected ImageView imgview;
 
-    protected int index; // 0-> immobile 1-> en train de courir 2->saut 3->chute
+    protected int index; //défini l'état de l'objet animé
     protected int durationframe;
     protected int animframe;
     protected int indexmax;
@@ -17,7 +17,6 @@ public abstract class AnimatedThing {
     protected int deltatime;
     protected String id;
 
-    protected Rectangle2D hitbox;
 
     public AnimatedThing(double x, double y, String spritesheet) {
         this.x = x;
@@ -26,7 +25,7 @@ public abstract class AnimatedThing {
         this.index = 0;
         this.durationframe = 5;
         this.offset = 100;
-        this.hitbox = new Rectangle2D(x,y,sizeofwX,sizeofwY);
+
         this.imgview = new ImageView(new Image(spritesheet));
         getImgview().setViewport(new Rectangle2D(0, 0, getSizeofwX(), getSizeofwY()));
         getImgview().setX(getX());
@@ -34,6 +33,7 @@ public abstract class AnimatedThing {
 
     }
 
+    //tous les getter utiles
     public ImageView getImgview() {
         return imgview;
     }
@@ -54,14 +54,15 @@ public abstract class AnimatedThing {
         return sizeofwY;
     }
 
-
     public String getId() {
         return id;
     }
 
     abstract void update(long time);
 
+    //fonction qui teste la collision de l'objet animé avec une autre hitbox(celle du héros en générale)
     public boolean testHitbox(double xhero,double yhero,int sizeX, int sizeY){
+        Rectangle2D hitbox = new Rectangle2D(x,y,sizeofwX,sizeofwY);
         return hitbox.intersects(new Rectangle2D(xhero,yhero,sizeX,sizeY));
     }
 

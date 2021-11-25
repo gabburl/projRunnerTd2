@@ -1,7 +1,7 @@
 import javafx.geometry.Rectangle2D;
 
 public class speedboost extends AnimatedThing{
-    public speedboost(double x, double y, String spritesheet, int sizeofwX, int sizeofwY, int indexmax) {
+    public speedboost(double x, double y, String spritesheet) {
         super(x, y, spritesheet);
         this.id = "speedboost";
         this.sizeofwX =26;
@@ -9,7 +9,7 @@ public class speedboost extends AnimatedThing{
         this.indexmax=2;
     }
 
-    @Override
+    //animation de speedboost
     public void update(long time){
         if (deltatime ==0){
             getImgview().setViewport(new Rectangle2D(sizeofwX*animframe,0,sizeofwX, sizeofwY));

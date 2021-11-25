@@ -1,17 +1,17 @@
 public class Camera {
     private double x;
-    private double y;
-    private double k;
-    private double f;
-    private double m;
+    private final double y;
+    private final double k;
+    private final double f;
+    private final double m;
     private double ax;
     private double vx;
 
     public Camera(int x, int y) {
         this.x = x;
         this.y = y;
-        this.k=1;
-        this.f=1.5;
+        this.k=5;
+        this.f=3;
         this.m=1;
         this.ax=0;
         this.vx=0;
@@ -21,9 +21,6 @@ public class Camera {
         return x;
     }
 
-    public double getY() {
-        return y;
-    }
 
     @Override
     public String toString() {
@@ -31,16 +28,13 @@ public class Camera {
     }
 
     public void update(long time,double xHeros) {
-        double ax =  (k/m) *  (xHeros-x) + (f/m)*vx;
+        ax =  (k/m) *  (xHeros-x) + (f/m)*vx;
         double deltavx = ax * 0.016;
         vx = vx - deltavx;
         double deltax = vx *0.016;
         x= x - deltax;
     }
 
-    public void setCamera(int x,int y){
-        this.x=x;
-        this.y = y;
-    }
+
 
 }
